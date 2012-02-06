@@ -18,25 +18,25 @@ class MoviesController < ApplicationController
     p "params is" 
     p params  
     ratingsHash = params["ratings"]
-    if ratingsHash != nil
-      allowedRatings = ratingsHash.keys
-    elsif params["commit"] == nil
-      allowedRatings = @all_ratings
-    else
-      allowedRatings = []
-    end
+    allowedRatings = ratingsHash.keys
+    
+    #find(:all, :conditions => [ "rating" = ? , user_name, password ])
+    #Company.find(:first, :conditions => ["id = :id AND name = :name AND division = :division AND created_at > :accounting_date", { :id => 3, :name => "37signals", :division => "First", :accounting_date => '2005-01-01' }])
+    
+    #Movie.find(:all, :conditions => { 'rating' => allowedRatings })
+    
     
     
     if (paramTitle == nil) && (paramDate == nil)
-      @movies = Movie.find(:all, :conditions => { 'rating' => allowedRatings })
+      @movies = Movie.all
     elsif paramTitle == "true"
-      @movies = Movie.find(:all, :conditions => { 'rating' => allowedRatings }, :order => 'title')
+      @movies = Movie.find(:all, :order => 'title')
       @sortTitle = true
     elsif paramDate == "true"
-      @movies = Movie.find(:all, :conditions => { 'rating' => allowedRatings }, :order => 'release_date')
+      @movies = Movie.find(:all, :order => 'release_date')
       @sortDate = true
     else
-      @movies = Movie.find(:all, :conditions => { 'rating' => allowedRatings })
+      @movies = Movie.all
     end
     
   end
