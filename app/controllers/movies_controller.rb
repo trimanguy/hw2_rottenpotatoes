@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
     @sortDate = false
     paramTitle = params["sortTitle"]
     paramDate = params["sortDate"]
-    print params
+    
     if (paramTitle == nil) && (paramDate == nil)
       @movies = Movie.all
     elsif paramTitle == "true"
